@@ -71,6 +71,7 @@ def download_one(url: str, fmt: str, outdir: str) -> Optional[str]:
         "nocheckcertificate": False, # explicit TLS verification
         "outtmpl": outtmpl,
         "noplaylist": True,          # ensure single item only
+        "remote_components": ["ejs:github"],
     }
 
     if fmt == "mp3":
@@ -155,7 +156,7 @@ def main():
     fmt = Prompt.ask("Choose format", choices=["mp3", "mp4"], default="mp3")
 
     # 3) Choose output folder
-    default_out = "Downloads"
+    default_out = os.path.expanduser("~/Downloads") 
     # outdir_in = Prompt.ask("Type 'Downloads' as Output Fodler", default=default_out).strip() or default_out
     outdir_in = default_out
     outdir = ensure_folder(outdir_in)
